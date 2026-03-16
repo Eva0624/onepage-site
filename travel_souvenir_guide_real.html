@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>法比荷旅遊伴手禮清單 真實圖片版</title>
+  <style>
+    :root {
+      --ink: #1f1d18;
+      --muted: #696152;
+      --card: #fffdf8;
+      --line: #e7d9c8;
+      --accent: #b64c2f;
+      --soft: #f7ede1;
+      --bg1: #faf5ed;
+      --bg2: #f4eadf;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, #f1d8c7 0, transparent 26%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+    }
+    .page {
+      width: 100%;
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 20px 14px 36px;
+    }
+    .hero, .foot {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(182, 138, 98, 0.24);
+      border-radius: 26px;
+      padding: 20px 18px;
+      box-shadow: 0 16px 40px rgba(91, 62, 31, 0.08);
+    }
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.15;
+    }
+    .subtitle {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .top10 {
+      margin-top: 16px;
+      background: var(--soft);
+      border-radius: 20px;
+      padding: 14px 16px;
+    }
+    .top10 h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    .top10 ol {
+      margin: 0;
+      padding-left: 22px;
+      display: grid;
+      gap: 6px;
+    }
+    .city-card {
+      margin-top: 18px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 20px 16px;
+      box-shadow: 0 12px 32px rgba(84, 58, 31, 0.06);
+      break-inside: avoid;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 15px;
+    }
+    h2 {
+      margin: 6px 0 0;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+    .location {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .section-title {
+      margin-top: 18px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .logo-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .brand-card, .product-card {
+      margin: 0;
+      background: #fff;
+      border: 1px solid #efe2d5;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .brand-card {
+      min-height: 122px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .brand-img {
+      width: 100%;
+      max-width: 180px;
+      max-height: 52px;
+      object-fit: contain;
+    }
+    .brand-card figcaption {
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .focus-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .focus-card {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 14px 14px 10px;
+      background: linear-gradient(180deg, #fffdf9 0%, #fff8f0 100%);
+    }
+    .focus-card h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    li {
+      margin: 0 0 7px;
+      line-height: 1.55;
+      font-size: 15px;
+    }
+    .product-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .product-img {
+      width: 100%;
+      height: 196px;
+      object-fit: cover;
+      display: block;
+      background: #f6f1ea;
+    }
+    .product-card figcaption {
+      padding: 11px 12px 12px;
+      display: grid;
+      gap: 4px;
+    }
+    .product-card strong {
+      font-size: 15px;
+    }
+    .product-card span {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .foot {
+      margin-top: 20px;
+    }
+    .foot p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .sources {
+      margin-top: 10px;
+      padding-left: 18px;
+    }
+    .sources li {
+      font-size: 12px;
+      word-break: break-all;
+    }
+    a {
+      color: #8c3a25;
+      text-decoration: none;
+    }
+    @media (max-width: 720px) {
+      .page { padding: 14px 10px 28px; }
+      h1 { font-size: 26px; }
+      .logo-row, .product-row, .focus-grid { grid-template-columns: 1fr; }
+    }
+    @media print {
+      body { background: #fff; }
+      .page { max-width: none; padding: 10mm 9mm 14mm; }
+      .hero, .city-card, .foot { box-shadow: none; }
+      .city-card, .focus-card, .product-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1>法比荷旅遊伴手禮清單</h1>
+      <p class="subtitle">品牌對應加強版。這版優先換成更接近你原始清單的品牌圖與商品圖；少數抓不到穩定官方圖的品項，則以真實實拍圖補齊，避免 PDF 變成空白圖。</p>
+      <div class="top10">
+        <h2>⭐ 最推薦必買 TOP 10</h2>
+        <ol><li>Stroopwafels 焦糖煎餅</li><li>Tony's Chocolonely 巧克力</li><li>Lotus 焦糖餅乾</li><li>Cote d'Or 巧克力</li><li>Bonne Maman 果醬</li><li>Michel et Augustin 餅乾</li><li>比利時手工巧克力</li><li>Gouda 起司</li><li>法國貴腐酒</li><li>Maille 芥末</li></ol>
+      </div>
+    </section>
+
+
+    <section class="city-card">
+      <div class="city-head">
+        <div class="eyebrow">🇫🇷 法國 巴黎</div>
+        <h2>Novotel Roissy CDG Convention & Spa (4★)</h2>
+        <p class="location">📍 Roissy-en-France，戴高樂機場旁小鎮</p>
+      </div>
+
+      <div class="section-title">真實超商 LOGO</div>
+      <div class="logo-row">
+    <figure class="brand-card">
+      <img class="brand-img" src="https://upload.wikimedia.org/wikipedia/en/6/65/Carrefour_Groupe.svg" alt="Carrefour logo" referrerpolicy="no-referrer">
+      <figcaption>Carrefour</figcaption>
+    </figure>
+
+    <figure class="brand-card">
+      <img class="brand-img" src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Logo_Franprix_-_2015.svg" alt="Franprix logo" referrerpolicy="no-referrer">
+      <figcaption>Franprix</figcaption>
+    </figure>
+
+    <figure class="brand-card">
+      <img class="brand-img" src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Monoprix_logo.svg" alt="Monoprix logo" referrerpolicy="no-referrer">
+      <figcaption>Monoprix</figcaption>
+    </figure>
+    </div>
+
+      <div class="focus-grid">
+        <article class="focus-card">
+          <h3>🏪 步行 10 分鐘內超市</h3>
+          <ul><li>Carrefour Express Roissy</li><li>Franprix</li><li>Monoprix</li><li>三間都在 Roissy Village，步行約 5 到 10 分鐘</li></ul>
+        </article>
+        <article class="focus-card">
+          <h3>🍫 必買伴手禮</h3>
+          <ul><li>Laduree 馬卡龍</li><li>Pierre Herme 馬卡龍</li><li>Valrhona 巧克力</li><li>Michel et Augustin 餅乾</li><li>Bonne Maman 果醬</li><li>Maille Dijon 芥末</li></ul>
+        </article>
+        <article class="focus-card">
+          <h3>🍪 可帶回台灣零食</h3>
+          <ul><li>LU Petit Beurre 奶油餅乾</li><li>LU Prince 巧克力餅乾</li><li>St Michel 奶油餅乾</li><li>Bonne Maman 瑪德蓮</li><li>Michel et Augustin 曲奇</li><li>Kinder Bueno 歐洲版</li></ul>
+        </article>
+        <article class="focus-card">
+          <h3>🍷 貴腐酒 / 酒類建議</h3>
+          <ul><li>Sauternes 貴腐酒是法國代表性的甜白酒</li><li>常見酒莊：Chateau d'Yquem、Chateau Suduiraut、Chateau Rieussec、Chateau Guiraud</li><li>一般款約 25 至 60 歐元，頂級款 100 歐元以上</li><li>購買建議：巴黎機場免稅店或 Carrefour 大型超市酒區</li></ul>
+        </article>
+      </div>
+
+      <div class="section-title">真實伴手禮圖片</div>
+      <div class="product-row">
+    <figure class="product-card">
+      <img class="product-img" src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Macarons_from_Ladur%C3%A9e_on_display.jpg" alt="Laduree 馬卡龍" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Laduree 馬卡龍</strong>
+        <span>Laduree 實拍圖</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://www.pierreherme.com/media//macarons_cache/300x300/CMS/les_macarons/mac-ispahan_300x300.png" alt="Pierre Herme 馬卡龍" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Pierre Herme 馬卡龍</strong>
+        <span>Pierre Herme 官網商品圖</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://res.cloudinary.com/valrhona/image/upload/c_limit,f_auto,fl_progressive,h_600,q_auto,w_800/dam/0388dbe76609b06f" alt="Valrhona 巧克力" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Valrhona 巧克力</strong>
+        <span>Valrhona 官方品牌圖</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Bonne_maman_confiture.JPG" alt="Bonne Maman 果醬" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Bonne Maman 果醬</strong>
+        <span>Bonne Maman 實品圖</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Dijon_mustard_on_a_spoon_-_20051218.jpg" alt="Maille Dijon 芥末" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Maille Dijon 芥末</strong>
+        <span>Dijon mustard 真實照片</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Yquem99.jpg" alt="法國貴腐酒" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>法國貴腐酒</strong>
+        <span>Chateau d'Yquem 參考瓶照</span>
+      </figcaption>
+    </figure>
+    </div>
+    </section>
+
+    <section class="city-card">
+      <div class="city-head">
+        <div class="eyebrow">🇧🇪 比利時 布魯塞爾</div>
+        <h2>Pullman Brussels Centre Midi (4★)</h2>
+        <p class="location">📍 Brussels Midi 南站</p>
+      </div>
+
+      <div class="section-title">真實超商 LOGO</div>
+      <div class="logo-row">
+    <figure class="brand-card">
+      <img class="brand-img" src="https://upload.wikimedia.org/wikipedia/en/6/65/Carrefour_Groupe.svg" alt="Carrefour logo" referrerpolicy="no-referrer">
+      <figcaption>Carrefour</figcaption>
+    </figure>
+
+    <figure class="brand-card">
+      <img class="brand-img" src="https://static.delhaize.be/static/next/icons/logo.be.svg?buildNumber=24de80dd348eeb451d4c585b5367e2306b3758e7275436f3111c22e68f2806b0" alt="Delhaize logo" referrerpolicy="no-referrer">
+      <figcaption>Delhaize</figcaption>
+    </figure>
+
+    <figure class="brand-card">
+      <img class="brand-img" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Lidl-Logo.svg" alt="Lidl logo" referrerpolicy="no-referrer">
+      <figcaption>Lidl</figcaption>
+    </figure>
+    </div>
+
+      <div class="focus-grid">
+        <article class="focus-card">
+          <h3>🏪 步行 10 分鐘內超市</h3>
+          <ul><li>Carrefour Express</li><li>Delhaize Supermarket</li><li>Lidl</li><li>Delhaize 是比利時大型連鎖超市</li></ul>
+        </article>
+        <article class="focus-card">
+          <h3>🍫 必買伴手禮</h3>
+          <ul><li>Neuhaus</li><li>Godiva</li><li>Pierre Marcolini</li><li>Leonidas，CP 值最高</li></ul>
+        </article>
+        <article class="focus-card">
+          <h3>🍪 可帶回台灣零食</h3>
+          <ul><li>Lotus Biscoff 焦糖餅乾</li><li>Cote d'Or 巧克力</li><li>Jules Destrooper 奶油餅乾</li><li>Galler 巧克力棒</li><li>比利時超市巧克力品質普遍很高</li></ul>
+        </article>
+        <article class="focus-card">
+          <h3>🍷 貴腐酒 / 酒類建議</h3>
+          <ul><li>修道院啤酒可優先找 Chimay、Westmalle、Rochefort</li><li>偏甜口味可選 Kriek 櫻桃啤酒</li><li>若要方便攜帶，優先挑小瓶裝或禮盒裝</li></ul>
+        </article>
+      </div>
+
+      <div class="section-title">真實伴手禮圖片</div>
+      <div class="product-row">
+    <figure class="product-card">
+      <img class="product-img" src="https://www.neuhauschocolates.com/on/demandware.static/-/Sites-neuhaus-catalog-master/default/dw8f2536b6/Pralines/Pralines%20transparent/5000726%20Galerie%20Closed%20-%20GB%20-%201654x1654px.png" alt="Neuhaus" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Neuhaus</strong>
+        <span>Neuhaus 官方商品圖</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://www.godiva.com/cdn/shop/files/CORE25_30pc_Gold_GiftBox_16254_05.jpg?v=1772640206&width=1200" alt="Godiva" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Godiva</strong>
+        <span>Godiva 官網禮盒圖</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://upload.wikimedia.org/wikipedia/commons/3/34/Chocolate_piece_in_a_cup_-_Marcolini.jpg" alt="Pierre Marcolini" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Pierre Marcolini</strong>
+        <span>Pierre Marcolini 真實商品照</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://www.leonidas.com/themes/custom/leonidas_theme/images/default-share-social.jpg" alt="Leonidas" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Leonidas</strong>
+        <span>Leonidas 官方分享圖</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://www.lotusbiscoff.com/sites/default/files/p_image_header/Biscoff%20portfolio%20overview%20picture%20%281%29_1.png" alt="Lotus Biscoff" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Lotus Biscoff</strong>
+        <span>Lotus 官方品牌圖</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://upload.wikimedia.org/wikipedia/commons/7/77/Jules_Destrooper_butter_waffle.jpg" alt="Jules Destrooper" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Jules Destrooper</strong>
+        <span>Jules Destrooper 實品圖</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://upload.wikimedia.org/wikipedia/commons/0/01/Trappist_Beer_2015-08-15.jpg" alt="修道院啤酒" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>修道院啤酒</strong>
+        <span>Trappist beer 真實照片</span>
+      </figcaption>
+    </figure>
+    </div>
+    </section>
+
+    <section class="city-card">
+      <div class="city-head">
+        <div class="eyebrow">🇳🇱 荷蘭 鹿特丹</div>
+        <h2>Van der Valk Hotel Rotterdam Blijdorp (4★)</h2>
+        <p class="location">📍 靠近動物園</p>
+      </div>
+
+      <div class="section-title">真實超商 LOGO</div>
+      <div class="logo-row">
+    <figure class="brand-card">
+      <img class="brand-img" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Albert_Heijn_Logo.svg" alt="Albert Heijn logo" referrerpolicy="no-referrer">
+      <figcaption>Albert Heijn</figcaption>
+    </figure>
+
+    <figure class="brand-card">
+      <img class="brand-img" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Lidl-Logo.svg" alt="Lidl logo" referrerpolicy="no-referrer">
+      <figcaption>Lidl</figcaption>
+    </figure>
+    </div>
+
+      <div class="focus-grid">
+        <article class="focus-card">
+          <h3>🏪 步行 10 分鐘內超市</h3>
+          <ul><li>Albert Heijn</li><li>Lidl</li><li>Albert Heijn 是荷蘭最大連鎖超市</li></ul>
+        </article>
+        <article class="focus-card">
+          <h3>🍫 必買伴手禮</h3>
+          <ul><li>Gouda 起司</li><li>Edam 起司</li><li>超市常見真空包裝，適合帶回台灣</li></ul>
+        </article>
+        <article class="focus-card">
+          <h3>🍪 可帶回台灣零食</h3>
+          <ul><li>Stroopwafels 焦糖煎餅</li><li>Tony's Chocolonely 巧克力</li><li>Drop 甘草糖</li><li>De Ruijter 巧克力米</li></ul>
+        </article>
+        <article class="focus-card">
+          <h3>🍷 貴腐酒 / 酒類建議</h3>
+          <ul><li>特色酒類可找 Jenever 荷蘭琴酒</li><li>品牌可看 Bols、De Kuyper</li></ul>
+        </article>
+      </div>
+
+      <div class="section-title">真實伴手禮圖片</div>
+      <div class="product-row">
+    <figure class="product-card">
+      <img class="product-img" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Stroopwafels_01.jpg" alt="Stroopwafels" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Stroopwafels</strong>
+        <span>焦糖煎餅實拍</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Tony%27s_Chocolonely_01.jpg" alt="Tony's Chocolonely" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Tony's Chocolonely</strong>
+        <span>Tony's 實品圖</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Chesses_gouda_affinage.JPG" alt="Gouda 起司" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Gouda 起司</strong>
+        <span>Gouda cheese 真實照片</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://upload.wikimedia.org/wikipedia/commons/5/52/SmallEdamCheese.jpg" alt="Edam 起司" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Edam 起司</strong>
+        <span>Edam cheese 真實照片</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Hollandse_Graanjenever_0495.JPG" alt="Jenever" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Jenever</strong>
+        <span>荷蘭琴酒實拍</span>
+      </figcaption>
+    </figure>
+    </div>
+    </section>
+
+    <section class="city-card">
+      <div class="city-head">
+        <div class="eyebrow">🇳🇱 荷蘭 阿姆斯特丹</div>
+        <h2>The Florian Hotel Amsterdam Schiphol (4★)</h2>
+        <p class="location">📍 Hoofddorp / Schiphol</p>
+      </div>
+
+      <div class="section-title">真實超商 LOGO</div>
+      <div class="logo-row">
+    <figure class="brand-card">
+      <img class="brand-img" src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Albert_Heijn_Logo.svg" alt="Albert Heijn logo" referrerpolicy="no-referrer">
+      <figcaption>Albert Heijn</figcaption>
+    </figure>
+
+    <figure class="brand-card">
+      <img class="brand-img" src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Jumbo_Logo.svg" alt="Jumbo logo" referrerpolicy="no-referrer">
+      <figcaption>Jumbo</figcaption>
+    </figure>
+
+    <figure class="brand-card">
+      <img class="brand-img" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Lidl-Logo.svg" alt="Lidl logo" referrerpolicy="no-referrer">
+      <figcaption>Lidl</figcaption>
+    </figure>
+    </div>
+
+      <div class="focus-grid">
+        <article class="focus-card">
+          <h3>🏪 步行 10 分鐘內超市</h3>
+          <ul><li>Albert Heijn</li><li>Jumbo Supermarket</li><li>Lidl</li></ul>
+        </article>
+        <article class="focus-card">
+          <h3>🍫 必買伴手禮</h3>
+          <ul><li>Old Amsterdam Cheese</li><li>Gouda Cheese</li></ul>
+        </article>
+        <article class="focus-card">
+          <h3>🍪 可帶回台灣零食</h3>
+          <ul><li>Fresh Stroopwafels</li><li>Tony's Chocolonely</li><li>Hoppe 咖啡餅乾</li><li>Pepernoten 香料餅</li></ul>
+        </article>
+        <article class="focus-card">
+          <h3>🍷 貴腐酒 / 酒類建議</h3>
+          <ul><li>最後一天可直接在 Schiphol Airport 機場免稅店買法國紅酒、貴腐酒、香檳</li><li>機場選擇通常最完整，適合最後補貨</li></ul>
+        </article>
+      </div>
+
+      <div class="section-title">真實伴手禮圖片</div>
+      <div class="product-row">
+    <figure class="product-card">
+      <img class="product-img" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Stroopwafels_01.jpg" alt="Stroopwafels" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Stroopwafels</strong>
+        <span>焦糖煎餅實拍</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Tony%27s_Chocolonely_01.jpg" alt="Tony's Chocolonely" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Tony's Chocolonely</strong>
+        <span>Tony's 實品圖</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://www.hoppe.eu/images/content/page67/5b69775af6mockup-oaties-group.png" alt="Hoppe 咖啡餅乾" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Hoppe 咖啡餅乾</strong>
+        <span>Hoppe 官網產品形象圖</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://static.bolletje.nl/cache/bolletje-kruidnoten-games.2797/bolletje-kruidnoten-games-s700x700-q80.png" alt="Pepernoten / Kruidnoten" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Pepernoten / Kruidnoten</strong>
+        <span>Bolletje Kruidnoten 官方圖</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Chesses_gouda_affinage.JPG" alt="Gouda 起司" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>Gouda 起司</strong>
+        <span>Gouda cheese 真實照片</span>
+      </figcaption>
+    </figure>
+
+    <figure class="product-card">
+      <img class="product-img" src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Yquem99.jpg" alt="法國貴腐酒" referrerpolicy="no-referrer">
+      <figcaption>
+        <strong>法國貴腐酒</strong>
+        <span>Chateau d'Yquem 參考瓶照</span>
+      </figcaption>
+    </figure>
+    </div>
+    </section>
+
+
+    <section class="foot">
+      <p>整理時間：2026 年 3 月 13 日。此版用於個人收藏與手機查看。若你還要更精簡，我可以再做「一頁式採買版」或「只保留 TOP 清單版」。</p>
+      <ul class="sources"><li><a href="https://en.wikipedia.org/wiki/Carrefour">https://en.wikipedia.org/wiki/Carrefour</a></li><li><a href="https://zh.wikipedia.org/wiki/Franprix">https://zh.wikipedia.org/wiki/Franprix</a></li><li><a href="https://fr.wikipedia.org/wiki/Monoprix_(France)">https://fr.wikipedia.org/wiki/Monoprix_(France)</a></li><li><a href="https://www.delhaize.be/">https://www.delhaize.be/</a></li><li><a href="https://en.wikipedia.org/wiki/Lidl">https://en.wikipedia.org/wiki/Lidl</a></li><li><a href="https://en.wikipedia.org/wiki/Albert_Heijn">https://en.wikipedia.org/wiki/Albert_Heijn</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Jumbo_Logo.svg">https://commons.wikimedia.org/wiki/File:Jumbo_Logo.svg</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Macarons_from_Ladur%C3%A9e_on_display.jpg">https://commons.wikimedia.org/wiki/File:Macarons_from_Ladur%C3%A9e_on_display.jpg</a></li><li><a href="https://www.pierreherme.com/en/the-macarons-collection">https://www.pierreherme.com/en/the-macarons-collection</a></li><li><a href="https://www.valrhona.com/en">https://www.valrhona.com/en</a></li><li><a href="https://en.wikipedia.org/wiki/Bonne_Maman">https://en.wikipedia.org/wiki/Bonne_Maman</a></li><li><a href="https://en.wikipedia.org/wiki/Dijon_mustard">https://en.wikipedia.org/wiki/Dijon_mustard</a></li><li><a href="https://en.wikipedia.org/wiki/Sauternes_(wine)">https://en.wikipedia.org/wiki/Sauternes_(wine)</a></li><li><a href="https://www.neuhauschocolates.com/en_US/pralines/galerie/4400726.html">https://www.neuhauschocolates.com/en_US/pralines/galerie/4400726.html</a></li><li><a href="https://www.godiva.com/">https://www.godiva.com/</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Chocolate_piece_in_a_cup_-_Marcolini.jpg">https://commons.wikimedia.org/wiki/File:Chocolate_piece_in_a_cup_-_Marcolini.jpg</a></li><li><a href="https://www.leonidas.com/be_en/chocolates">https://www.leonidas.com/be_en/chocolates</a></li><li><a href="https://www.lotusbiscoff.com/en-gb/foodprofessionals/biscoff-image-gallery">https://www.lotusbiscoff.com/en-gb/foodprofessionals/biscoff-image-gallery</a></li><li><a href="https://en.wikipedia.org/wiki/Jules_Destrooper">https://en.wikipedia.org/wiki/Jules_Destrooper</a></li><li><a href="https://en.wikipedia.org/wiki/Trappist_beer">https://en.wikipedia.org/wiki/Trappist_beer</a></li><li><a href="https://en.wikipedia.org/wiki/Stroopwafel">https://en.wikipedia.org/wiki/Stroopwafel</a></li><li><a href="https://en.wikipedia.org/wiki/Tony%27s_Chocolonely">https://en.wikipedia.org/wiki/Tony%27s_Chocolonely</a></li><li><a href="https://en.wikipedia.org/wiki/Gouda_cheese">https://en.wikipedia.org/wiki/Gouda_cheese</a></li><li><a href="https://en.wikipedia.org/wiki/Edam_cheese">https://en.wikipedia.org/wiki/Edam_cheese</a></li><li><a href="https://en.wikipedia.org/wiki/Jenever">https://en.wikipedia.org/wiki/Jenever</a></li><li><a href="https://www.hoppe.eu/">https://www.hoppe.eu/</a></li><li><a href="https://www.bolletje.nl/">https://www.bolletje.nl/</a></li></ul>
+    </section>
+  </main>
+</body>
+</html>
