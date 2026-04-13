@@ -1,0 +1,383 @@
+﻿<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>一週健身與飲食計畫</title>
+  <style>
+    :root {
+      --bg: #f4f8f6;
+      --card: #ffffff;
+      --ink: #1f2a24;
+      --muted: #5f6f66;
+      --line: #d9e5df;
+      --brand: #16724f;
+      --brand-soft: #eaf5f0;
+      --warn: #9b5d00;
+      --radius: 16px;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, #e7f4ee 0, transparent 40%),
+        radial-gradient(circle at 100% 100%, #dff3ee 0, transparent 35%),
+        var(--bg);
+      line-height: 1.65;
+    }
+
+    .wrap {
+      width: min(1100px, 92vw);
+      margin: 24px auto 64px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0f5f42, #1b8a61);
+      color: #fff;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+    }
+
+    .hero p {
+      margin: 0;
+      opacity: 0.92;
+      font-size: 0.98rem;
+    }
+
+    .meta {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+    }
+
+    .section {
+      margin-top: 20px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 1.02rem;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 12px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 860px;
+      background: #fff;
+    }
+
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 11px 10px;
+      border-bottom: 1px solid #edf2ee;
+      font-size: 0.93rem;
+    }
+
+    th {
+      background: #f4fbf7;
+      color: #154b35;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    .day {
+      white-space: nowrap;
+      font-weight: 700;
+      color: #0f5f42;
+    }
+
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 10px;
+    }
+
+    .food-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      background: #fcfffd;
+    }
+
+    .food-card b {
+      display: block;
+      margin-bottom: 4px;
+      color: #124c34;
+    }
+
+    .quick {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+    }
+
+    .quick .tile {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--brand-soft);
+      padding: 10px;
+      font-size: 0.92rem;
+    }
+
+    .quick .tile b {
+      color: #0f5f42;
+    }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 10px;
+      background: #fff;
+    }
+
+    details[open] {
+      background: #fbfffd;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: #133f2e;
+    }
+
+    ul {
+      margin: 10px 0 0;
+      padding-left: 20px;
+    }
+
+    .focus {
+      border-left: 4px solid var(--brand);
+      background: #f0faf5;
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 0.92rem;
+    }
+
+    .warn {
+      color: var(--warn);
+      font-weight: 700;
+    }
+
+    .footer {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100%, 94vw); margin-top: 14px; }
+      .hero { border-radius: 16px; padding: 18px; }
+      .section { padding: 14px; }
+      th, td { padding: 9px 8px; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>一週健身與飲食計畫（手機速讀版）</h1>
+      <p>目標：減脂＋保肌。原則是先把動作穩定、蛋白質吃夠，再逐步加重。</p>
+      <div class="meta">
+        <span class="pill">每次重訓 45–70 分鐘</span>
+        <span class="pill">每日蛋白質 90–115g</span>
+        <span class="pill">HIIT 每週 1 次即可</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>每週訓練＋飲食表</h2>
+      <p class="hint">橫向可滑動。依照「訓練安排 → 有氧安排 → 飲食重點」執行。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>星期</th>
+              <th>訓練安排</th>
+              <th>啞鈴訓練內容</th>
+              <th>有氧安排</th>
+              <th>飲食重點</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="day">周一</td>
+              <td>上半身 A + 核心</td>
+              <td>胸推 4x8-12、單手划船 4x8-12/側、肩推 3x8-12、地板胸推 3x8-12、側平舉 3x12-15、二頭彎舉 3x10-12、過頭三頭伸展 3x10-12；核心：負重捲腹 3x12-15、平板撐 3x30-45 秒</td>
+              <td>重訓後爬坡走 15-20 分鐘</td>
+              <td>早餐蛋+高蛋白豆漿；晚餐雞胸+沙拉+地瓜/玉米</td>
+            </tr>
+            <tr>
+              <td class="day">周二</td>
+              <td>下半身 A + 核心</td>
+              <td>高腳杯深蹲 4x8-12、羅馬尼亞硬舉 4x8-12、保加利亞分腿蹲 3x8-10/側、臀橋/臀推 3x10-15、提踵 3x15-20；核心：俄羅斯轉體 3x16-20、抬腿 3x10-15</td>
+              <td>晚餐後原地踏步 20-30 分鐘</td>
+              <td>午餐少炸少油；晚餐自煮鍋物可行，蛋白質與蔬菜吃足</td>
+            </tr>
+            <tr>
+              <td class="day">周三</td>
+              <td>恢復日</td>
+              <td>不做重訓</td>
+              <td>爬坡走 25 分鐘或散步 40-60 分鐘</td>
+              <td>三餐照常，蛋白質不能掉；晚餐澱粉可少一點</td>
+            </tr>
+            <tr>
+              <td class="day">周四</td>
+              <td>上半身 B + 核心</td>
+              <td>地板胸推 4x8-12、俯身划船 4x8-12、阿諾肩推 3x8-12、地板飛鳥 3x10-12、後三角飛鳥 3x12-15、槌式彎舉 3x10-12、窄握啞鈴胸推 3x10-12；核心：負重仰臥起坐 3x12、平板撐碰肩 3x20</td>
+              <td>重訓後快走 15-20 分鐘</td>
+              <td>午餐主蛋白質+蔬菜；晚餐雞胸+沙拉+地瓜/玉米</td>
+            </tr>
+            <tr>
+              <td class="day">周五</td>
+              <td>下半身 B + 短 HIIT</td>
+              <td>相撲深蹲 4x10-12、啞鈴硬舉 4x8-10、反向弓箭步 3x10/側、單腳 RDL 3x8-10/側、臀橋 3x12-15、提踵 3x15-20；核心：腳跟點地捲腹 3x20、抬腿 3x10-15</td>
+              <td>HIIT 12-15 分鐘（快 30 秒 / 慢 60 秒，共 8-10 組）</td>
+              <td>午餐正常吃；晚餐雞胸+沙拉，必要時補乾淨碳水</td>
+            </tr>
+            <tr>
+              <td class="day">周六</td>
+              <td>輕有氧日</td>
+              <td>不做重訓</td>
+              <td>散步 45-60 分鐘或爬坡走 20-30 分鐘；拉筋 10 分鐘</td>
+              <td>三餐正常，維持高蛋白；雞胸、豆腐、鍋物都可</td>
+            </tr>
+            <tr>
+              <td class="day">周日</td>
+              <td>休息日</td>
+              <td>不做重訓</td>
+              <td>散步 20-30 分鐘，輕鬆伸展</td>
+              <td>碳水不必太高，但蛋白質照樣吃夠，避免放縱日</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>每日飲食簡表</h2>
+      <div class="food-grid">
+        <article class="food-card"><b>早餐</b>滷蛋 2 顆 + 高蛋白豆漿 1 瓶</article>
+        <article class="food-card"><b>午餐</b>正常吃，但要有主蛋白質＋蔬菜；少炸少油少濃醬</article>
+        <article class="food-card"><b>下午餓了</b>茶葉蛋 / 無糖豆漿 / 無糖優格（三選一）</article>
+        <article class="food-card"><b>晚餐（訓練日）</b>雞胸肉 + 生菜沙拉 + 地瓜/玉米/飯糰（三選一）</article>
+        <article class="food-card"><b>晚餐（休息日）</b>雞胸肉 + 生菜沙拉 + 茶葉蛋或豆腐</article>
+        <article class="food-card"><b>每日蛋白質目標</b><span class="warn">90-115g</span></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>手機速看版（周一到周日）</h2>
+      <div class="quick">
+        <div class="tile"><b>周一</b><br>上半身 A + 核心 + 爬坡走</div>
+        <div class="tile"><b>周二</b><br>下半身 A + 核心 + 晚餐後踏步</div>
+        <div class="tile"><b>周三</b><br>恢復日：散步或爬坡走</div>
+        <div class="tile"><b>周四</b><br>上半身 B + 核心 + 快走</div>
+        <div class="tile"><b>周五</b><br>下半身 B + 核心 + HIIT 12-15 分鐘</div>
+        <div class="tile"><b>周六</b><br>輕有氧 + 拉筋</div>
+        <div class="tile"><b>周日</b><br>休息 + 散步</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>注意事項（展開查看）</h2>
+
+      <details open>
+        <summary>訓練執行原則</summary>
+        <ul>
+          <li>先求動作穩定，再追重量。</li>
+          <li>每組保留 1-2 下餘裕（接近力竭但姿勢不崩）。</li>
+          <li>可穩定做到上限次數、姿勢穩、最後一組不亂，再加重。</li>
+          <li>休息時間：大動作 60-90 秒，小動作 45-60 秒，核心 30-45 秒。</li>
+          <li>每次訓練控制在 45-70 分鐘。</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>各動作注意重點</summary>
+        <ul>
+          <li>胸推：肩不聳、手肘不要開太平、下放慢、胸發力。</li>
+          <li>划船：背打直、往腰拉、不要甩身。</li>
+          <li>肩推：核心收緊、不過度後仰、避免聳肩。</li>
+          <li>側平舉/後三角：重量別貪重，重控制。</li>
+          <li>深蹲/相撲：膝蓋跟腳尖同向，起身用腿臀發力。</li>
+          <li>RDL：背直、核心緊、屁股往後推，不是彎腰撿東西。</li>
+          <li>分腿蹲/弓箭步：前腳穩，下降要控，站起靠前腳發力。</li>
+          <li>臀橋/臀推：頂端夾臀 1 秒，避免用腰頂。</li>
+          <li>核心：不甩腿，慢做、穩定下背。</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>熱身、收操、有氧</summary>
+        <ul>
+          <li>重訓前熱身 5-8 分鐘：快走、徒手深蹲、手臂繞圈、暖身組。</li>
+          <li>重訓後收操 5 分鐘：胸、背、臀腿、肩膀。</li>
+          <li>HIIT 目前每週 1 次、每次 12-15 分鐘即可，不用堆到 40 分鐘。</li>
+          <li>低強度有氧（爬坡走、散步、晚餐後踏步）可持續。</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>飲食與追蹤</summary>
+        <ul>
+          <li>蛋白質先達標（90-115g/日）。</li>
+          <li>訓練日晚餐若恢復不足，可補地瓜、玉米或飯糰。</li>
+          <li>休息日可降碳水，但不是放縱日。</li>
+          <li>自煮鍋物優先：牛/雞/蝦/豆腐/菇類/高麗菜；少炸豆皮與加工火鍋料。</li>
+          <li>每天早上量體重；每週固定記錄腰圍、平均體重與重量/次數進步。</li>
+        </ul>
+        <p class="focus">判斷方向正確：7 天平均體重微降、腰圍下降、啞鈴重量或次數上升、腹部線條更緊實（出現 2-3 項即可）。</p>
+      </details>
+    </section>
+  </main>
+</body>
+</html>
