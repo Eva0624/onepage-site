@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>韓國付款方式說明</title>
+  <link rel="stylesheet" href="busan.css?v=1">
+  <script src="busan.js?v=1" defer></script>
+</head>
+<body data-page="payment">
+  <main class="page">
+    <section class="hero">
+      <svg class="sky-deco" viewBox="0 0 360 150" preserveAspectRatio="xMaxYMin meet" aria-hidden="true">
+        <circle class="sun-glow" cx="318" cy="40" r="36"/>
+        <circle class="sun" cx="318" cy="40" r="22"/>
+        <g class="cloud cloud-a">
+          <circle cx="60" cy="62" r="16"/><circle cx="80" cy="52" r="22"/><circle cx="104" cy="60" r="17"/>
+          <rect x="44" y="60" width="76" height="18" rx="9"/>
+        </g>
+        <g class="cloud cloud-b">
+          <circle cx="212" cy="104" r="12"/><circle cx="228" cy="96" r="17"/><circle cx="246" cy="104" r="12"/>
+          <rect x="200" y="102" width="58" height="14" rx="7"/>
+        </g>
+        <g class="cloud cloud-c">
+          <circle cx="282" cy="118" r="9"/><circle cx="294" cy="112" r="12"/><circle cx="307" cy="118" r="9"/>
+          <rect x="273" y="117" width="43" height="10" rx="5"/>
+        </g>
+        <path class="gull gull-a" d="M150 46 q9 -10 18 0 q9 -10 18 0"/>
+        <path class="gull gull-b" d="M186 24 q7 -8 14 0 q7 -8 14 0"/>
+        <path class="gull gull-c" d="M250 62 q6 -7 12 0 q6 -7 12 0"/>
+      </svg>
+      <a class="back-link" href="../busan.html">← 回釜山主畫面</a>
+      <div class="eyebrow">💳 韓國付款資訊紀錄</div>
+      <h1>付款方式說明</h1>
+      <p class="subtitle">出發前確認 → 看店家類型 → 決定用 LINE Pay 還是刷哪張卡。已刷金額可以直接在下面記，手機會記住。</p>
+      <div class="toolbar">
+        <div class="progress-line">出發前確認 <span data-count>0 / 0</span></div>
+        <button type="button" class="btn-reset" data-reset>全部清除</button>
+      </div>
+    </section>
+
+    <svg class="wave-divider" viewBox="0 0 780 22" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 12 C65 2 130 22 195 12 S325 2 390 12 S520 22 585 12 S715 2 780 12 V22 H0 Z"/>
+    </svg>
+
+    <section class="tips-card">
+      <h2>✈️ 出發前確認（10/21 前）</h2>
+      <ul class="check-list">
+        <li class="check-item" data-item><label><input type="checkbox" data-key="pre-costco" checked><span class="check-box"></span><span class="check-text">富邦Costco 登錄 10 月海外活動</span></label></li>
+        <li class="check-item" data-item><label><input type="checkbox" data-key="pre-dawho" checked><span class="check-box"></span><span class="check-text">永豐大戶卡確認有大戶等級</span></label></li>
+        <li class="check-item" data-item><label><input type="checkbox" data-key="pre-richart"><span class="check-box"></span><span class="check-text">Richart 切換成「玩旅刷」</span></label></li>
+        <li class="check-item" data-item><label><input type="checkbox" data-key="pre-linepay"><span class="check-box"></span><span class="check-text">看一下台新卡哪張是 Visa，把它綁進 LINE Pay 並設為預設付款卡</span></label></li>
+        <li class="check-item" data-item><label><input type="checkbox" data-key="pre-overseas"><span class="check-box"></span><span class="check-text">確定有開通國外刷卡，以及刷卡額度調整</span></label></li>
+      </ul>
+    </section>
+
+    <section class="tips-card">
+      <h2>📱 有 LINE Pay 標誌的店</h2>
+      <div class="info-grid">
+        <article class="info-block accent">
+          <h3>🏪 超商／餐廳／咖啡廳</h3>
+          <ul class="bullet-list">
+            <li>用 <strong>LINE Pay</strong>（綁台新 Visa 卡）</li>
+            <li>刷到約<strong>台幣 2,000 元</strong>後改刷實體卡</li>
+          </ul>
+        </article>
+        <article class="info-block accent">
+          <h3>🛍️ 免稅店／美妝／服飾／百貨</h3>
+          <ul class="bullet-list">
+            <li>用 <strong>LINE Pay</strong>（綁台新 Visa 卡）</li>
+            <li>刷到約<strong>台幣 5,000～6,600 元</strong>後改刷實體卡</li>
+          </ul>
+        </article>
+      </div>
+      <div class="callout warn">⚠️ 付款前把 LINE Pay 地區切到「韓國」</div>
+    </section>
+
+    <section class="tips-card">
+      <h2>💳 一般店家（刷實體卡）</h2>
+      <p class="day-tag">照順序刷，刷到額度就換下一張。</p>
+
+      <article class="step-card">
+        <div class="step-num">1</div>
+        <div>
+          <h3>富邦Costco</h3>
+          <p>刷到 <strong>15,000</strong> 換下一張</p>
+          <div class="spend">
+            <label>已刷金額
+              <input type="number" inputmode="numeric" min="0" step="100" placeholder="0" data-key="spend-costco" data-limit="15000">
+            </label>
+            <div class="bar"><div class="bar-fill"></div></div>
+            <p class="spend-meta"><span class="spend-now">0</span>／15,000　剩 <span class="spend-left">15,000</span><span class="spend-over-text">　→ 已達上限，換下一張</span></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="step-card">
+        <div class="step-num">2</div>
+        <div>
+          <h3>永豐大戶卡</h3>
+          <p>刷到 <strong>16,000</strong> 換下一張</p>
+          <div class="spend">
+            <label>已刷金額
+              <input type="number" inputmode="numeric" min="0" step="100" placeholder="0" data-key="spend-dawho" data-limit="16000">
+            </label>
+            <div class="bar"><div class="bar-fill"></div></div>
+            <p class="spend-meta"><span class="spend-now">0</span>／16,000　剩 <span class="spend-left">16,000</span><span class="spend-over-text">　→ 已達上限，換下一張</span></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="step-card">
+        <div class="step-num">3</div>
+        <div>
+          <h3>台新街口卡 或 Richart</h3>
+          <p>刷到底不用換</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="tips-card">
+      <h2>⚠️ 結帳提醒</h2>
+      <ul class="tips-list">
+        <li>一律選<strong>韓圓（KRW）</strong>結帳，不要選台幣。</li>
+        <li>Costco 卡<strong>不要</strong>綁 LINE Pay。</li>
+        <li>每次刷完 Costco／大戶卡，回來這頁把金額加上去。</li>
+        <li>帶護照：Olive Young、藥局、樂天超市都能退稅。</li>
+      </ul>
+      <p class="note-line">勾選與金額只存在這台手機的瀏覽器，換裝置不會同步。</p>
+    </section>
+    <p class="back-bottom"><a class="back-link" href="../busan.html">← 回釜山主畫面</a></p>
+  </main>
+</body>
+</html>
