@@ -66,7 +66,42 @@
     });
   });
 
-  /* 4. 搜尋按鈕 */
+  /* 4. 點縮圖放大 */
+  var thumbs = document.querySelectorAll('.pcard-thumb img');
+  if (thumbs.length) {
+    var lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.innerHTML = '<button type="button" class="lightbox-close" aria-label="關閉">✕</button>' +
+      '<img alt=""><div class="lightbox-cap"></div><div class="lightbox-hint">點任何地方關閉</div>';
+    document.body.appendChild(lb);
+    var lbImg = lb.querySelector('img'), lbCap = lb.querySelector('.lightbox-cap');
+    function openLb(img) {
+      var card = img.closest('.pcard');
+      var title = card ? card.querySelector('h4') : null;
+      lbImg.src = img.currentSrc || img.src;
+      lbCap.textContent = title ? title.textContent : '';
+      lb.classList.add('open');
+      document.body.classList.add('lightbox-open');
+    }
+    function closeLb() {
+      lb.classList.remove('open');
+      document.body.classList.remove('lightbox-open');
+      lbImg.removeAttribute('src');
+    }
+    each(thumbs, function (img) {
+      var hint = document.createElement('span');
+      hint.className = 'zoom-hint'; hint.setAttribute('aria-hidden', 'true'); hint.textContent = '⤢';
+      img.parentNode.appendChild(hint);
+      img.addEventListener('click', function () {
+        if (img.parentNode.classList.contains('no-img')) return;
+        openLb(img);
+      });
+    });
+    lb.addEventListener('click', closeLb);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+  }
+
+  /* 5. 搜尋按鈕 */
   var ENG = {
     gimg:  { label: 'Google 圖片', q: 'en', url: 'https://www.google.com/search?tbm=isch&q=' },
     oy:    { label: 'Olive Young', q: 'en', url: 'https://global.oliveyoung.com/search?query=' },
