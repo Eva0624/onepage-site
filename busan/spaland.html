@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>SPA LAND 汗蒸幕流程圖</title>
+  <link rel="stylesheet" href="busan.css?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <style>
+    /* ===== 漫畫風（本頁專用） ===== */
+    :root {
+      --ink-c: #1b1e1c;
+      --pop-yellow: #ffd93b;
+      --pop-pink: #ff6b9d;
+      --pop-blue: #4fb3ff;
+      --pop-orange: #ff8a3d;
+      --pop-mint: #5fe3b8;
+    }
+    body {
+      background:
+        radial-gradient(rgba(27, 30, 28, 0.13) 1.3px, transparent 1.4px) 0 0 / 9px 9px,
+        linear-gradient(180deg, #dff1ff 0%, #fff6dc 100%);
+      background-attachment: scroll;
+    }
+    .bangers { font-family: "Bangers", "Segoe UI", "Noto Sans TC", sans-serif; letter-spacing: 0.04em; }
+    .comic {
+      position: relative;
+      background: #fff;
+      border: 3px solid var(--ink-c);
+      border-radius: 8px;
+      box-shadow: 7px 7px 0 var(--ink-c);
+    }
+    .comic-hero {
+      margin-top: 4px;
+      padding: 22px 18px 26px;
+      padding-right: 120px;
+      overflow: hidden;
+      background:
+        radial-gradient(rgba(27, 30, 28, 0.1) 1.2px, transparent 1.3px) 0 0 / 7px 7px,
+        linear-gradient(135deg, #bfe3f7 0%, #fff3c4 100%);
+    }
+    .comic-hero .back-link { border: 2px solid var(--ink-c); box-shadow: 3px 3px 0 var(--ink-c); background: #fff; }
+    .comic-title {
+      margin: 10px 0 4px;
+      font-size: 40px;
+      line-height: 1.05;
+      color: var(--pop-pink);
+      -webkit-text-stroke: 1.5px var(--ink-c);
+      text-shadow: 4px 4px 0 var(--ink-c);
+      font-weight: 900;
+    }
+    .comic-title .bangers { font-size: 54px; color: var(--pop-yellow); display: block; }
+    .comic-sub { margin: 10px 0 0; font-weight: 700; line-height: 1.7; color: var(--ink-c); }
+    .hero-char { position: absolute; right: -8px; bottom: -10px; width: 118px; height: 126px; pointer-events: none; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pop-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 6px 11px; border: 2.5px solid var(--ink-c); border-radius: 999px;
+      background: #fff; font-weight: 900; font-size: 14px; box-shadow: 3px 3px 0 var(--ink-c);
+    }
+    .pop-badge.y { background: var(--pop-yellow); }
+    .pop-badge.b { background: var(--pop-blue); color: #fff; }
+    .pop-badge.p { background: var(--pop-pink); color: #fff; }
+    .pop-badge.m { background: var(--pop-mint); }
+
+    .sfx {
+      position: absolute; display: grid; place-items: center;
+      width: 86px; height: 86px; padding: 8px;
+      background: var(--pop-yellow);
+      clip-path: polygon(50% 0%, 61% 14%, 78% 6%, 80% 24%, 98% 28%, 88% 44%, 100% 58%, 84% 66%, 86% 86%, 68% 80%, 58% 98%, 46% 84%, 28% 96%, 26% 78%, 6% 76%, 16% 60%, 0% 46%, 16% 36%, 8% 18%, 26% 20%, 32% 2%);
+      font-weight: 900; font-size: 15px; text-align: center; line-height: 1.1; color: var(--ink-c);
+      transform: rotate(-10deg); pointer-events: none;
+    }
+    .sfx::before { content: ""; position: absolute; inset: 0; clip-path: inherit; background: var(--ink-c); z-index: -1; transform: translate(4px, 4px); }
+    .sfx.pink { background: var(--pop-pink); color: #fff; }
+    .sfx.blue { background: var(--pop-blue); color: #fff; }
+
+    .comic-section { margin-top: 26px; padding: 18px 16px 20px; }
+    .comic-h2 {
+      display: inline-block; margin: -34px 0 10px -6px; padding: 6px 14px;
+      background: var(--ink-c); color: var(--pop-yellow);
+      font-size: 22px; font-weight: 900; transform: rotate(-2deg);
+      box-shadow: 4px 4px 0 var(--pop-pink);
+    }
+    .comic-section p.lead { margin: 4px 0 0; color: var(--muted); line-height: 1.7; font-weight: 600; }
+
+    /* 流程圖 */
+    .flow-wrap { margin-top: 12px; }
+    .flow-svg { width: 100%; height: auto; display: block; }
+    .flow-svg text { font-family: "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif; }
+    .flow-svg .num { font-family: "Bangers", sans-serif; font-size: 20px; letter-spacing: 0.04em; }
+
+    /* 步驟面板 */
+    .panel-grid { display: grid; gap: 22px; margin-top: 14px; }
+    .panel {
+      position: relative; padding: 16px 14px 16px;
+      background: #fff; border: 3px solid var(--ink-c); border-radius: 6px; box-shadow: 6px 6px 0 var(--ink-c);
+    }
+    .panel:nth-child(odd) { transform: rotate(-0.6deg); }
+    .panel:nth-child(even) { transform: rotate(0.6deg); }
+    .panel-head { display: grid; grid-template-columns: 58px 1fr; gap: 12px; align-items: center; }
+    .step-badge {
+      width: 58px; height: 58px; display: grid; place-items: center;
+      background: var(--pop-yellow); border: 3px solid var(--ink-c); border-radius: 50%;
+      font-family: "Bangers", sans-serif; font-size: 26px; box-shadow: 3px 3px 0 var(--ink-c);
+    }
+    .panel h3 { margin: 0; font-size: 19px; line-height: 1.3; }
+    .panel h3 small { display: block; font-size: 13px; color: var(--muted); font-weight: 700; margin-top: 2px; }
+    .panel ul { margin: 10px 0 0; padding-left: 20px; }
+    .panel li { margin-bottom: 7px; line-height: 1.65; font-size: 15.5px; }
+    .bubble {
+      position: relative; margin: 12px 0 0 6px; padding: 10px 14px;
+      background: #fff; border: 2.5px solid var(--ink-c); border-radius: 18px;
+      font-weight: 800; font-size: 14.5px; line-height: 1.55;
+    }
+    .bubble::before, .bubble::after {
+      content: ""; position: absolute; left: 22px; bottom: -14px;
+      border-style: solid; border-width: 14px 10px 0 0; border-color: var(--ink-c) transparent transparent transparent;
+    }
+    .bubble::after { bottom: -10px; left: 24px; border-width: 11px 7px 0 0; border-color: #fff transparent transparent transparent; }
+    .bubble.y { background: var(--pop-yellow); }
+    .bubble.y::after { border-color: var(--pop-yellow) transparent transparent transparent; }
+    .bubble.p { background: #ffe1ec; }
+    .bubble.p::after { border-color: #ffe1ec transparent transparent transparent; }
+    .bubble.warn { background: #ffe5d6; }
+    .bubble.warn::after { border-color: #ffe5d6 transparent transparent transparent; }
+    .panel .mini-icon { width: 100%; height: 64px; display: block; margin: 8px auto 0; }
+
+    /* 汗蒸房溫度 */
+    .room-grid { display: grid; gap: 12px; margin-top: 12px; }
+    .room {
+      display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;
+      padding: 12px 14px; background: #fff; border: 2.5px solid var(--ink-c); border-radius: 10px; box-shadow: 4px 4px 0 var(--ink-c);
+    }
+    .room h4 { margin: 0; font-size: 16.5px; }
+    .room p { margin: 4px 0 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
+    .temp {
+      display: grid; place-items: center; min-width: 74px; padding: 8px 10px;
+      border: 2.5px solid var(--ink-c); border-radius: 12px; font-family: "Bangers", sans-serif; font-size: 24px; letter-spacing: 0.04em;
+    }
+    .temp.hot { background: var(--pop-pink); color: #fff; }
+    .temp.warm { background: var(--pop-orange); color: #fff; }
+    .temp.cool { background: var(--pop-mint); }
+    .temp-bar { height: 10px; margin-top: 8px; border: 2px solid var(--ink-c); border-radius: 999px; background: #fff; overflow: hidden; }
+    .temp-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--pop-mint), var(--pop-yellow), var(--pop-pink)); }
+
+    /* 吃的、帶的 */
+    .food-grid { display: grid; gap: 12px; margin-top: 12px; }
+    .food {
+      padding: 14px; background: #fff; border: 2.5px solid var(--ink-c); border-radius: 10px; box-shadow: 4px 4px 0 var(--ink-c);
+    }
+    .food h4 { margin: 0; font-size: 17px; }
+    .food .price { display: inline-block; margin-top: 6px; padding: 4px 10px; background: var(--pop-yellow); border: 2px solid var(--ink-c); border-radius: 999px; font-weight: 900; font-size: 13.5px; }
+    .food p { margin: 8px 0 0; color: var(--muted); font-size: 14.5px; line-height: 1.6; }
+    .yesno { display: grid; gap: 12px; margin-top: 12px; }
+    .yesno .col { padding: 14px; border: 2.5px solid var(--ink-c); border-radius: 10px; background: #fff; box-shadow: 4px 4px 0 var(--ink-c); }
+    .yesno h4 { margin: 0 0 8px; font-size: 17px; }
+    .yesno ul { margin: 0; padding-left: 0; list-style: none; }
+    .yesno li { padding: 6px 0; border-bottom: 1.5px dashed #d9d9d9; font-size: 15.5px; line-height: 1.5; }
+    .yesno li:last-child { border-bottom: 0; }
+    .yesno .ok li::before { content: "✔ "; color: #1e9e62; font-weight: 900; }
+    .yesno .no li::before { content: "✘ "; color: #e0405f; font-weight: 900; }
+    .faq { margin-top: 12px; }
+    .faq details { border: 2.5px solid var(--ink-c); border-radius: 10px; background: #fff; margin-top: 10px; box-shadow: 4px 4px 0 var(--ink-c); }
+    .faq summary { padding: 12px 14px; font-weight: 900; cursor: pointer; font-size: 15.5px; list-style: none; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::before { content: "Q "; font-family: "Bangers", sans-serif; font-size: 20px; color: var(--pop-pink); }
+    .faq details p { margin: 0; padding: 0 14px 12px; color: var(--muted); line-height: 1.65; font-size: 15px; }
+    .src { margin-top: 14px; font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    @media (min-width: 700px) {
+      .panel-grid { grid-template-columns: 1fr 1fr; }
+      .room-grid { grid-template-columns: 1fr 1fr; }
+      .food-grid { grid-template-columns: 1fr 1fr 1fr; }
+      .yesno { grid-template-columns: 1fr 1fr; }
+      .comic-title { font-size: 48px; }
+      .comic-title .bangers { font-size: 66px; }
+      .hero-char { width: 180px; height: 192px; }
+      .comic-hero { padding-right: 190px; }
+    }
+    @media print { .sfx { display: none; } .panel { transform: none; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="comic comic-hero">
+      <a class="back-link" href="../busan.html">← 回釜山主畫面</a>
+      <div class="sfx pink" style="top:10px; right:112px;">呼～<br>好桑！</div>
+      <h1 class="comic-title"><span class="bangers">SPA LAND</span>汗蒸幕 流程圖</h1>
+      <p class="comic-sub">釜山新世界百貨 Centum City 1F，入口在 Prada 和 Dior 櫃位中間。10/24（六）13:30–17:00 來這裡，照下面 10 格走就不會卡關。</p>
+      <div class="badge-row">
+        <span class="pop-badge y">🎫 現場 ₩26,000</span>
+        <span class="pop-badge b">⏱ 一張票 4 小時</span>
+        <span class="pop-badge">🕘 09:00–22:00（最後入場 21:00）</span>
+        <span class="pop-badge m">🚇 2 號線 Centum City 站 12 號出口</span>
+        <span class="pop-badge p">👧 7 歲以上</span>
+      </div>
+      <svg class="hero-char" viewBox="0 0 150 160" aria-hidden="true">
+        <!-- 羊角頭小人 -->
+        <g stroke="#1b1e1c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+          <rect x="38" y="92" width="74" height="70" rx="18" fill="#ffd93b"/>
+          <circle cx="75" cy="62" r="36" fill="#ffe8cf"/>
+          <path d="M40 48 q10 -28 35 -28 q25 0 35 28 q-6 -6 -14 -4 q-8 -16 -21 -16 q-13 0 -21 16 q-8 -2 -14 4z" fill="#fff"/>
+          <circle cx="34" cy="44" r="13" fill="#fff"/>
+          <circle cx="116" cy="44" r="13" fill="#fff"/>
+          <circle cx="62" cy="64" r="3.2" fill="#1b1e1c" stroke="none"/>
+          <circle cx="88" cy="64" r="3.2" fill="#1b1e1c" stroke="none"/>
+          <path d="M64 78 q11 9 22 0" fill="none"/>
+          <circle cx="52" cy="74" r="5" fill="#ffb3c7" stroke="none"/>
+          <circle cx="98" cy="74" r="5" fill="#ffb3c7" stroke="none"/>
+          <path d="M20 118 q-4 -20 20 -24" fill="none"/>
+          <path d="M130 118 q4 -20 -20 -24" fill="none"/>
+        </g>
+        <g fill="none" stroke="#4fb3ff" stroke-width="3" stroke-linecap="round" opacity="0.9">
+          <path d="M14 30 q4 -8 0 -16 q-4 -8 0 -14"/>
+          <path d="M26 20 q4 -8 0 -16"/>
+        </g>
+      </svg>
+    </section>
+
+    <section class="comic comic-section">
+      <h2 class="comic-h2">① 一眼看懂：10 步流程圖</h2>
+      <p class="lead">從換票到取鞋離場，照號碼走。手環從第 3 步戴到最後一步都用得到，別拔！</p>
+      <div class="flow-wrap">
+        <svg class="flow-svg" viewBox="0 0 380 1248" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SPA LAND 10 步流程圖">
+<defs>
+<symbol id="ic-ticket" viewBox="0 0 24 24"><g stroke="#1b1e1c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" fill="none"><rect x="3" y="7" width="18" height="10" rx="2" fill="#ffd93b"/><path d="M12 7v10" stroke-dasharray="2 2"/><circle cx="3" cy="12" r="2" fill="#fff"/><circle cx="21" cy="12" r="2" fill="#fff"/></g></symbol>
+<symbol id="ic-escalator" viewBox="0 0 24 24"><g stroke="#1b1e1c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" fill="none"><path d="M3 19h5l6-8h7" fill="none"/><path d="M3 15h4l6-8h8" fill="none"/><path d="M8 19v-4M14 11v-4" /></g></symbol>
+<symbol id="ic-shoe" viewBox="0 0 24 24"><g stroke="#1b1e1c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" fill="none"><path d="M3 16c0-2 3-3 5-3l3-4h3l1 4c3 0 6 1 6 4H3z" fill="#4fb3ff"/><path d="M3 16h18v2H3z" fill="#1b1e1c"/></g></symbol>
+<symbol id="ic-band" viewBox="0 0 24 24"><g stroke="#1b1e1c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" fill="none"><ellipse cx="12" cy="12" rx="8" ry="6" fill="#ff6b9d"/><ellipse cx="12" cy="12" rx="4.5" ry="3" fill="#fff"/><rect x="10" y="3" width="4" height="4" rx="1" fill="#ffd93b"/></g></symbol>
+<symbol id="ic-clothes" viewBox="0 0 24 24"><g stroke="#1b1e1c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" fill="none"><path d="M8 4l4 2 4-2 4 4-3 2v10H7V10L4 8z" fill="#5fe3b8"/><rect x="15" y="14" width="7" height="7" rx="1" fill="#fff"/></g></symbol>
+<symbol id="ic-locker" viewBox="0 0 24 24"><g stroke="#1b1e1c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" fill="none"><rect x="5" y="3" width="14" height="18" rx="1.5" fill="#ffd93b"/><path d="M12 3v18"/><circle cx="9.5" cy="12" r="1" fill="#1b1e1c"/><circle cx="14.5" cy="12" r="1" fill="#1b1e1c"/></g></symbol>
+<symbol id="ic-sauna" viewBox="0 0 24 24"><g stroke="#1b1e1c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" fill="none"><path d="M4 20v-7a8 8 0 0 1 16 0v7z" fill="#ff8a3d"/><rect x="10" y="13" width="4" height="7" fill="#fff"/><path d="M8 5c1-2-1-3 0-5M12 4c1-2-1-3 0-5M16 5c1-2-1-3 0-5" fill="none" stroke="#4fb3ff"/></g></symbol>
+<symbol id="ic-bath" viewBox="0 0 24 24"><g stroke="#1b1e1c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" fill="none"><path d="M3 12h18v3a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z" fill="#4fb3ff"/><path d="M5 12V6a2 2 0 0 1 4 0" fill="none"/><path d="M7 9c1-1 2-1 3 0s2 1 3 0 2-1 3 0" fill="none" stroke="#fff"/></g></symbol>
+<symbol id="ic-hanger" viewBox="0 0 24 24"><g stroke="#1b1e1c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" fill="none"><path d="M12 4a2 2 0 1 1 2 2v2l8 6H2l8-6V8" fill="#fff"/><path d="M4 14h16l-1 6H5z" fill="#ff6b9d"/></g></symbol>
+<symbol id="ic-exit" viewBox="0 0 24 24"><g stroke="#1b1e1c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" fill="none"><rect x="4" y="3" width="11" height="18" rx="1.5" fill="#5fe3b8"/><circle cx="12" cy="12" r="1" fill="#1b1e1c"/><path d="M15 12h7M19 9l3 3-3 3" fill="none"/></g></symbol>
+<marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1b1e1c"/></marker>
+</defs>
+<path d="M90 98 C90 144 290 98 290 144" fill="none" stroke="#1b1e1c" stroke-width="3.5" stroke-dasharray="7 6" marker-end="url(#arr)"/>
+<path d="M290 222 C290 268 90 222 90 268" fill="none" stroke="#1b1e1c" stroke-width="3.5" stroke-dasharray="7 6" marker-end="url(#arr)"/>
+<path d="M90 346 C90 392 290 346 290 392" fill="none" stroke="#1b1e1c" stroke-width="3.5" stroke-dasharray="7 6" marker-end="url(#arr)"/>
+<path d="M290 470 C290 516 90 470 90 516" fill="none" stroke="#1b1e1c" stroke-width="3.5" stroke-dasharray="7 6" marker-end="url(#arr)"/>
+<path d="M90 594 C90 640 290 594 290 640" fill="none" stroke="#1b1e1c" stroke-width="3.5" stroke-dasharray="7 6" marker-end="url(#arr)"/>
+<path d="M290 718 C290 764 90 718 90 764" fill="none" stroke="#1b1e1c" stroke-width="3.5" stroke-dasharray="7 6" marker-end="url(#arr)"/>
+<path d="M90 842 C90 888 290 842 290 888" fill="none" stroke="#1b1e1c" stroke-width="3.5" stroke-dasharray="7 6" marker-end="url(#arr)"/>
+<path d="M290 966 C290 1012 90 966 90 1012" fill="none" stroke="#1b1e1c" stroke-width="3.5" stroke-dasharray="7 6" marker-end="url(#arr)"/>
+<path d="M90 1090 C90 1136 290 1090 290 1136" fill="none" stroke="#1b1e1c" stroke-width="3.5" stroke-dasharray="7 6" marker-end="url(#arr)"/>
+<rect x="138" y="49" width="104" height="22" rx="11" fill="#eaf6fc" stroke="#1b1e1c" stroke-width="1.5"/>
+<text x="146" y="64" text-anchor="start" font-size="11.5" font-weight="800" fill="#1f6a9c">1F 入口・櫃檯</text>
+<rect x="138" y="297" width="82" height="22" rx="11" fill="#eaf6fc" stroke="#1b1e1c" stroke-width="1.5"/>
+<text x="146" y="312" text-anchor="start" font-size="11.5" font-weight="800" fill="#1f6a9c">鞋櫃區・閘機</text>
+<rect x="138" y="545" width="104" height="22" rx="11" fill="#eaf6fc" stroke="#1b1e1c" stroke-width="1.5"/>
+<text x="146" y="560" text-anchor="start" font-size="11.5" font-weight="800" fill="#1f6a9c">內部櫃檯・更衣室</text>
+<rect x="138" y="793" width="115" height="22" rx="11" fill="#eaf6fc" stroke="#1b1e1c" stroke-width="1.5"/>
+<text x="146" y="808" text-anchor="start" font-size="11.5" font-weight="800" fill="#1f6a9c">公共區 1F／2F</text>
+<rect x="160" y="917" width="82" height="22" rx="11" fill="#eaf6fc" stroke="#1b1e1c" stroke-width="1.5"/>
+<text x="234" y="932" text-anchor="end" font-size="11.5" font-weight="800" fill="#1f6a9c">更衣室・浴池</text>
+<rect x="171" y="1165" width="71" height="22" rx="11" fill="#eaf6fc" stroke="#1b1e1c" stroke-width="1.5"/>
+<text x="234" y="1180" text-anchor="end" font-size="11.5" font-weight="800" fill="#1f6a9c">閘機・鞋櫃</text>
+<g>
+<circle cx="94" cy="64" r="34" fill="#1b1e1c"/>
+<circle cx="90" cy="60" r="34" fill="#fff" stroke="#1b1e1c" stroke-width="3"/>
+<use href="#ic-ticket" x="73" y="43" width="34" height="34"/>
+<circle cx="60" cy="26" r="13" fill="#1b1e1c"/><circle cx="58" cy="24" r="13" fill="#ff6b9d" stroke="#1b1e1c" stroke-width="2.5"/>
+<text class="num" x="58" y="31" text-anchor="middle" fill="#fff">1</text>
+<text x="90" y="114" text-anchor="middle" font-size="13.5" font-weight="800" fill="#1b1e1c">櫃檯換票</text>
+</g>
+<g>
+<circle cx="294" cy="188" r="34" fill="#1b1e1c"/>
+<circle cx="290" cy="184" r="34" fill="#fff" stroke="#1b1e1c" stroke-width="3"/>
+<use href="#ic-escalator" x="273" y="167" width="34" height="34"/>
+<circle cx="260" cy="150" r="13" fill="#1b1e1c"/><circle cx="258" cy="148" r="13" fill="#ff6b9d" stroke="#1b1e1c" stroke-width="2.5"/>
+<text class="num" x="258" y="155" text-anchor="middle" fill="#fff">2</text>
+<text x="290" y="238" text-anchor="middle" font-size="13.5" font-weight="800" fill="#1b1e1c">手扶梯上樓</text>
+</g>
+<g>
+<circle cx="94" cy="312" r="34" fill="#1b1e1c"/>
+<circle cx="90" cy="308" r="34" fill="#ffd93b" stroke="#1b1e1c" stroke-width="3"/>
+<use href="#ic-shoe" x="73" y="291" width="34" height="34"/>
+<circle cx="60" cy="274" r="13" fill="#1b1e1c"/><circle cx="58" cy="272" r="13" fill="#ff6b9d" stroke="#1b1e1c" stroke-width="2.5"/>
+<text class="num" x="58" y="279" text-anchor="middle" fill="#fff">3</text>
+<text x="90" y="362" text-anchor="middle" font-size="13.5" font-weight="800" fill="#1b1e1c">鞋櫃→拿手環</text>
+</g>
+<g>
+<circle cx="294" cy="436" r="34" fill="#1b1e1c"/>
+<circle cx="290" cy="432" r="34" fill="#fff" stroke="#1b1e1c" stroke-width="3"/>
+<use href="#ic-band" x="273" y="415" width="34" height="34"/>
+<circle cx="260" cy="398" r="13" fill="#1b1e1c"/><circle cx="258" cy="396" r="13" fill="#ff6b9d" stroke="#1b1e1c" stroke-width="2.5"/>
+<text class="num" x="258" y="403" text-anchor="middle" fill="#fff">4</text>
+<text x="290" y="486" text-anchor="middle" font-size="13.5" font-weight="800" fill="#1b1e1c">手環感應閘機</text>
+</g>
+<g>
+<circle cx="94" cy="560" r="34" fill="#1b1e1c"/>
+<circle cx="90" cy="556" r="34" fill="#fff" stroke="#1b1e1c" stroke-width="3"/>
+<use href="#ic-clothes" x="73" y="539" width="34" height="34"/>
+<circle cx="60" cy="522" r="13" fill="#1b1e1c"/><circle cx="58" cy="520" r="13" fill="#ff6b9d" stroke="#1b1e1c" stroke-width="2.5"/>
+<text class="num" x="58" y="527" text-anchor="middle" fill="#fff">5</text>
+<text x="90" y="610" text-anchor="middle" font-size="13.5" font-weight="800" fill="#1b1e1c">領汗蒸服毛巾</text>
+</g>
+<g>
+<circle cx="294" cy="684" r="34" fill="#1b1e1c"/>
+<circle cx="290" cy="680" r="34" fill="#fff" stroke="#1b1e1c" stroke-width="3"/>
+<use href="#ic-locker" x="273" y="663" width="34" height="34"/>
+<circle cx="260" cy="646" r="13" fill="#1b1e1c"/><circle cx="258" cy="644" r="13" fill="#ff6b9d" stroke="#1b1e1c" stroke-width="2.5"/>
+<text class="num" x="258" y="651" text-anchor="middle" fill="#fff">6</text>
+<text x="290" y="734" text-anchor="middle" font-size="13.5" font-weight="800" fill="#1b1e1c">更衣室換裝寄物</text>
+</g>
+<g>
+<circle cx="94" cy="808" r="34" fill="#1b1e1c"/>
+<circle cx="90" cy="804" r="34" fill="#fff" stroke="#1b1e1c" stroke-width="3"/>
+<use href="#ic-sauna" x="73" y="787" width="34" height="34"/>
+<circle cx="60" cy="770" r="13" fill="#1b1e1c"/><circle cx="58" cy="768" r="13" fill="#ff6b9d" stroke="#1b1e1c" stroke-width="2.5"/>
+<text class="num" x="58" y="775" text-anchor="middle" fill="#fff">7</text>
+<text x="90" y="858" text-anchor="middle" font-size="13.5" font-weight="800" fill="#1b1e1c">汗蒸幕玩一輪</text>
+</g>
+<g>
+<circle cx="294" cy="932" r="34" fill="#1b1e1c"/>
+<circle cx="290" cy="928" r="34" fill="#fff" stroke="#1b1e1c" stroke-width="3"/>
+<use href="#ic-bath" x="273" y="911" width="34" height="34"/>
+<circle cx="260" cy="894" r="13" fill="#1b1e1c"/><circle cx="258" cy="892" r="13" fill="#ff6b9d" stroke="#1b1e1c" stroke-width="2.5"/>
+<text class="num" x="258" y="899" text-anchor="middle" fill="#fff">8</text>
+<text x="290" y="982" text-anchor="middle" font-size="13.5" font-weight="800" fill="#1b1e1c">大眾浴池泡湯</text>
+</g>
+<g>
+<circle cx="94" cy="1056" r="34" fill="#1b1e1c"/>
+<circle cx="90" cy="1052" r="34" fill="#fff" stroke="#1b1e1c" stroke-width="3"/>
+<use href="#ic-hanger" x="73" y="1035" width="34" height="34"/>
+<circle cx="60" cy="1018" r="13" fill="#1b1e1c"/><circle cx="58" cy="1016" r="13" fill="#ff6b9d" stroke="#1b1e1c" stroke-width="2.5"/>
+<text class="num" x="58" y="1023" text-anchor="middle" fill="#fff">9</text>
+<text x="90" y="1106" text-anchor="middle" font-size="13.5" font-weight="800" fill="#1b1e1c">換回衣服取物</text>
+</g>
+<g>
+<circle cx="294" cy="1180" r="34" fill="#1b1e1c"/>
+<circle cx="290" cy="1176" r="34" fill="#ffd93b" stroke="#1b1e1c" stroke-width="3"/>
+<use href="#ic-exit" x="273" y="1159" width="34" height="34"/>
+<circle cx="260" cy="1142" r="13" fill="#1b1e1c"/><circle cx="258" cy="1140" r="13" fill="#ff6b9d" stroke="#1b1e1c" stroke-width="2.5"/>
+<text class="num" x="258" y="1147" text-anchor="middle" fill="#fff">10</text>
+<text x="290" y="1230" text-anchor="middle" font-size="13.5" font-weight="800" fill="#1b1e1c">結帳取鞋離場</text>
+</g>
+<g transform="translate(28 842) rotate(-12)"><polygon points="0,-22 7,-8 24,-10 14,2 22,16 6,12 0,26 -6,12 -22,16 -14,2 -24,-10 -7,-8" fill="#ffd93b" stroke="#1b1e1c" stroke-width="2.5" stroke-linejoin="round"/><text y="5" text-anchor="middle" font-size="12" font-weight="900" fill="#1b1e1c">HOT!</text></g>
+<g transform="translate(348 968) rotate(10)"><polygon points="0,-22 7,-8 24,-10 14,2 22,16 6,12 0,26 -6,12 -22,16 -14,2 -24,-10 -7,-8" fill="#4fb3ff" stroke="#1b1e1c" stroke-width="2.5" stroke-linejoin="round"/><text y="5" text-anchor="middle" font-size="11" font-weight="900" fill="#fff">呼～</text></g>
+</svg>
+      </div>
+    </section>
+
+    <section class="comic comic-section">
+      <h2 class="comic-h2">② 分格說明</h2>
+      <div class="panel-grid">
+
+        <article class="panel">
+          <div class="panel-head"><div class="step-badge">1</div><h3>櫃檯換票<small>線上票、Visit Busan Pass 都要先換</small></h3></div>
+          <ul>
+            <li>到 1F 入口櫃檯出示 Klook／KKday QR code 或 Visit Busan Pass 換實體票。</li>
+            <li>現場買票 ₩26,000；人多時要抽號碼牌排隊，先線上買比較省時。</li>
+            <li>票上有<strong>號碼</strong>和<strong>男／女</strong>，對應等一下的鞋櫃與置物櫃，一人一張自己拿好。</li>
+          </ul>
+          <div class="bubble y">櫃檯會附一張流程說明紙，卡關就拿出來看！</div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head"><div class="step-badge">2</div><h3>搭手扶梯上樓<small>櫃檯右手邊</small></h3></div>
+          <ul>
+            <li>換好票從櫃檯右手邊的手扶梯上去，就是鞋櫃區。</li>
+          </ul>
+          <div class="bubble">大件行李可以免費寄放，進場後交給內部櫃檯，出示手環就能領。</div>
+        </article>
+
+        <article class="panel">
+          <div class="step-badge" style="position:absolute; right:12px; top:-18px; width:46px; height:46px; font-size:18px; background:var(--pop-pink); color:#fff;">★</div>
+          <div class="panel-head"><div class="step-badge">3</div><h3>鞋子放進指定鞋櫃<small>拿到電子鑰匙手環</small></h3></div>
+          <ul>
+            <li>找票上號碼的鞋櫃，鞋子、襪子放進去。</li>
+            <li>鞋櫃上插著的<strong>電子鑰匙手環</strong>拔下來戴手上，接下來全程光腳。</li>
+          </ul>
+          <div class="bubble warn">手環 = 鞋櫃鑰匙 + 置物櫃鑰匙 + 錢包，離場前都要戴著！</div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head"><div class="step-badge">4</div><h3>手環感應閘機<small>對準洞口，不是刷</small></h3></div>
+          <ul>
+            <li>把手環<strong>對準閘機的洞口</strong>感應，不是像悠遊卡那樣刷。</li>
+          </ul>
+          <div class="bubble">作者在那邊刷了半天沒反應，你不要重蹈覆轍 XD</div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head"><div class="step-badge">5</div><h3>領汗蒸服＋兩條毛巾<small>內部櫃檯</small></h3></div>
+          <ul>
+            <li>出示門票，櫃檯依身型直接給上衣、褲子和兩條毛巾，不用講尺寸。</li>
+          </ul>
+          <div class="bubble y">毛巾不用自己帶，大眾浴池也有毛巾櫃可以拿。</div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head"><div class="step-badge">6</div><h3>更衣室換裝、寄物<small>男女分開・禁止拍照</small></h3></div>
+          <ul>
+            <li>找票上號碼的置物櫃，包包、衣服放進去（櫃內有衣架）。</li>
+            <li>在櫃子旁或廁所換上汗蒸服，<strong>內衣褲不用脫</strong>，這裡不需要全裸。</li>
+            <li>只帶<strong>手機和水</strong>，鎖櫃、手環戴好，直接走出更衣室去汗蒸區。</li>
+          </ul>
+          <div class="bubble warn">更衣室裡有很多裸體的人走來走去，不要嚇到。先別淋浴、泡湯，最後再來！</div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head"><div class="step-badge">7</div><h3>汗蒸幕區玩一輪<small>公共區域，男女會合</small></h3></div>
+          <ul>
+            <li>兩層樓：1F 各種主題汗蒸房、躺椅區、點心吧、戶外足浴；2F Relaxation Room、自助泡麵區、按摩椅。</li>
+            <li>建議順序：汗蒸房輪一遍 → 點心吧甜米露＋烤雞蛋 → 2F 泡麵區。</li>
+            <li>每間 10～15 分鐘就出來休息、多喝水；從低溫房開始，黃土房 69°C 留最後。</li>
+          </ul>
+          <div class="bubble p">學韓國人用毛巾折「羊角頭」戴著，拍貼機拍一張！</div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head"><div class="step-badge">8</div><h3>最後去大眾浴池泡湯、洗澡<small>預留 40～50 分鐘</small></h3></div>
+          <ul>
+            <li>回更衣室旁的大眾浴池：<strong>全裸、不能穿泳衣</strong>，進池前要先淋浴。</li>
+            <li>沐浴乳、洗髮精、潤髮乳都有，洗完回飯店不用再洗。</li>
+            <li>長髮要綁起來，自備髮圈。搓澡（₩35,000 起）在浴池裡找阿珠媽現場預約。</li>
+          </ul>
+          <div class="bubble y">先出汗、最後泡湯，才不會濕了又擦、脫了又穿。</div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head"><div class="step-badge">9</div><h3>換回衣服、取回寄物<small>更衣室</small></h3></div>
+          <ul>
+            <li>吹風機、身體乳、洗面乳、面霜、護髮油都有，只有化妝品要自備。</li>
+            <li>置物櫃東西全部拿出來，手環<strong>繼續戴著</strong>。</li>
+          </ul>
+          <div class="bubble">泡完皮膚會乾，護唇膏、乳液帶在包包裡。</div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head"><div class="step-badge">10</div><h3>結帳、取鞋、離場<small>手環插回鞋櫃</small></h3></div>
+          <ul>
+            <li>館內有消費（泡麵、點心、按摩椅…）就到內部櫃檯用手環感應結帳，現金或刷卡都可以。</li>
+            <li>沒消費就直接過閘機，回鞋櫃區取鞋，手環插回鞋櫃就完成。</li>
+          </ul>
+          <div class="bubble warn">超過 4 小時每小時加 ₩5,000；館內消費滿 ₩10,000 可延長到 6 小時。</div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="comic comic-section">
+      <h2 class="comic-h2">③ 汗蒸房溫度表</h2>
+      <p class="lead">從涼到熱排。怕熱的人進高溫房把毛巾蓋在臉上，呼吸會順很多。</p>
+      <div class="room-grid">
+        <div class="room"><div><h4>SEV 房</h4><p>木板地、燈光會變色，有開放式隔間，像包廂。</p><div class="temp-bar"><i style="width:30%"></i></div></div><div class="temp cool">29°C</div></div>
+        <div class="room"><div><h4>Body Sound 房</h4><p>竹林主題、放大自然白噪音，最好睡的一間。</p><div class="temp-bar"><i style="width:32%"></i></div></div><div class="temp cool">30°C</div></div>
+        <div class="room"><div><h4>土耳其浴房 Hammam</h4><p>異國氛圍、夠暗，據說幫助代謝老廢角質。</p><div class="temp-bar"><i style="width:32%"></i></div></div><div class="temp cool">30°C</div></div>
+        <div class="room"><div><h4>Wave Dream 房</h4><p>深海主題、天花板光會變色，半躺半坐超紓壓。</p><div class="temp-bar"><i style="width:34%"></i></div></div><div class="temp cool">31°C</div></div>
+        <div class="room"><div><h4>金字塔房 Pyramid</h4><p>會出汗但不悶，地上有硬枕和墊子。</p><div class="temp-bar"><i style="width:70%"></i></div></div><div class="temp warm">53°C</div></div>
+        <div class="room"><div><h4>鹽房 Salt</h4><p>喜馬拉雅鹽牆面地板，空間很亮，愛美的待這間。</p><div class="temp-bar"><i style="width:72%"></i></div></div><div class="temp warm">54°C</div></div>
+        <div class="room"><div><h4>黃土房 Yellow Ocher</h4><p>最燙的一間，像放大的胖花瓶。促進血液循環，手腳冰冷的人撐一下。</p><div class="temp-bar"><i style="width:96%"></i></div></div><div class="temp hot">69°C</div></div>
+      </div>
+      <p class="lead" style="margin-top:12px;">其他：戶外露天足浴池（冬天有保暖外套可借）、1F 陽傘躺椅區與峇里島風躺椅、地板蒸汽廳 Steam Hall、2F Relaxation Room（按摩椅等級躺椅、小孩不能進、最安靜）、瑜珈伸展室、遊戲室、拍貼機、付費按摩椅、Shim SPA。</p>
+    </section>
+
+    <section class="comic comic-section">
+      <h2 class="comic-h2">④ 吃什麼</h2>
+      <div class="food-grid">
+        <div class="food"><h4>🥚 甜米露＋烤雞蛋</h4><span class="price">₩4,500（1 杯＋3 顆）</span><p>1F 點心吧。出完汗來一杯冰甜米露超解渴，烤雞蛋附鹽巴，是汗蒸幕的標準配備。</p></div>
+        <div class="food"><h4>🍜 自助泡麵</h4><span class="price">₩10,000（1 碗＋1 罐飲料）</span><p>2F 穿過 Relaxation Room。10 多種泡麵自選，豆芽、雞蛋、年糕、魚餅、起司、泡菜等配料<strong>免費無限夾</strong>，煮麵機有中文說明。</p></div>
+        <div class="food"><h4>⏰ 泡麵區會提早關</h4><span class="price">打烊前 1 小時</span><p>淡季 22:00 打烊，泡麵區 21:00 準時收，晚 1 分鐘都不給吃。我們是下午去，沒這問題，但別拖到最後。</p></div>
+      </div>
+      <p class="lead" style="margin-top:12px;">2F 另有咖啡廳（熱狗、炸雞、鬆餅、冰沙）和餐廳（炸豬排、海鮮大醬湯、鮑魚海鮮湯等）。全部用手環記帳，離場一次結。</p>
+    </section>
+
+    <section class="comic comic-section">
+      <h2 class="comic-h2">⑤ 帶什麼・不用帶什麼</h2>
+      <div class="yesno">
+        <div class="col ok">
+          <h4>✅ 要帶</h4>
+          <ul>
+            <li>手機（公共區可用；更衣室、浴池禁止拍攝）</li>
+            <li>水（汗蒸完超渴，館內也有賣）</li>
+            <li>髮圈（長髮進浴池要綁）</li>
+            <li>護唇膏、乳液（泡完會乾）</li>
+            <li>卸妝用品（想卸妝再泡的話）</li>
+            <li>門票 QR code 或 Visit Busan Pass</li>
+          </ul>
+        </div>
+        <div class="col no">
+          <h4>❌ 不用帶</h4>
+          <ul>
+            <li>泳衣（浴池不能穿，汗蒸區穿館內服）</li>
+            <li>毛巾（入場給兩條）</li>
+            <li>沐浴乳、洗髮精、潤髮乳、吹風機（都有）</li>
+            <li>錢包（館內全用手環，出場結帳才付）</li>
+            <li>換洗內衣褲不是必須，汗蒸服裡可以穿自己的</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="comic comic-section">
+      <h2 class="comic-h2">⑥ 常見問題</h2>
+      <div class="faq">
+        <details><summary>男女分開嗎？</summary><p>汗蒸房、用餐區等公共區域男女一起；只有更衣室和大眾浴池分開。和家人一起來，換好衣服在公共區會合。</p></details>
+        <details><summary>一定要先淋浴嗎？</summary><p>只有進大眾浴池泡湯前要先淋浴。只想體驗汗蒸房不泡湯，就不用。</p></details>
+        <details><summary>可以玩多久？</summary><p>一張票 4 小時，超時每小時 ₩5,000。館內消費滿 ₩10,000 可延長到 6 小時。不能過夜。</p></details>
+        <details><summary>有年齡限制嗎？</summary><p>7 歲以上才能入場，7～12 歲要由同性別的監護人陪同。2F Relaxation Room 小孩不能進。</p></details>
+        <details><summary>有刺青可以進嗎？</summary><p>官方規定不行，但現場不會特別檢查，作者有看到明顯刺青的人在場內。有疑慮可向官方確認。</p></details>
+        <details><summary>月經來可以去嗎？</summary><p>只體驗汗蒸房沒問題，泡大眾浴池就不建議。</p></details>
+        <details><summary>公休日？</summary><p>SPA LAND 跟著新世界百貨公休，每月有幾天不營業。10/24 出發前到官網確認一下。</p></details>
+      </div>
+      <p class="src">整理自 <a href="https://debbiechien.com/spa-land-centum-city-busan/">Wander with Debbie：釜山汗蒸幕 Spa Land 懶人包（2026-10-01）</a>；票價、營業時間以現場與 <a href="https://www.shinsegae.com/store/main.do?storeCd=SC00013">新世界 Centum City 官網</a> 為準。優惠票：<a href="https://www.klook.com/activity/33180-spa-land-centum-city-ticket-busan/">Klook</a>。</p>
+    </section>
+
+    <p class="back-bottom"><a class="back-link" href="../busan.html">← 回釜山主畫面</a></p>
+  </main>
+</body>
+</html>
