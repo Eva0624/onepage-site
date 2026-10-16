@@ -87,16 +87,35 @@
     .flow-svg .num { font-family: "Cormorant Garamond", Georgia, serif; font-size: 17px; letter-spacing: 0.08em; }
     .flow-svg .zone { font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-size: 13px; letter-spacing: 0.06em; }
 
-    /* polaroid steps */
-    .panel-grid { display: grid; gap: 26px 20px; margin-top: 22px; }
+    /* polaroid steps：橫向輪播 */
+    .carousel { position: relative; margin-top: 18px; }
+    .panel-grid {
+      display: flex; gap: 16px; margin: 0 -12px; padding: 18px 12px 10px;
+      overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; scroll-padding: 0 12px;
+    }
+    .panel-grid::-webkit-scrollbar { display: none; }
     .panel {
-      position: relative; padding: 18px 16px 18px;
+      position: relative; flex: 0 0 calc(100% - 24px); max-width: 420px; scroll-snap-align: center; scroll-snap-stop: always;
+      padding: 20px 16px 18px; box-sizing: border-box;
       background: #fff; border: 1px solid var(--line-w); border-radius: 3px;
       box-shadow: 0 8px 22px rgba(59, 58, 54, 0.07);
+      transition: transform 0.25s ease, opacity 0.25s ease; opacity: 0.55;
     }
-    .panel:nth-child(3n+1) { transform: rotate(-0.8deg); }
-    .panel:nth-child(3n+2) { transform: rotate(0.6deg); }
-    .panel:nth-child(3n+3) { transform: rotate(-0.3deg); }
+    .panel.is-active { opacity: 1; }
+    .panel:nth-child(odd).is-active { transform: rotate(-0.6deg); }
+    .panel:nth-child(even).is-active { transform: rotate(0.6deg); }
+    .car-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 8px; }
+    .car-btn {
+      width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line-w); background: #fff; color: var(--ink-w);
+      font-family: var(--latin); font-size: 20px; line-height: 1; cursor: pointer; display: grid; place-items: center;
+    }
+    .car-btn:disabled { opacity: 0.3; cursor: default; }
+    .dots { display: flex; gap: 7px; align-items: center; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--line-w); border: 0; padding: 0; cursor: pointer; transition: all 0.2s; }
+    .dot.is-active { width: 18px; border-radius: 3px; background: var(--rose-deep); }
+    .car-count { font-family: var(--latin); letter-spacing: 0.12em; font-size: 13px; color: var(--ink-soft); min-width: 54px; text-align: center; }
+    .swipe-hint { margin: 6px 0 0; text-align: center; }
     .panel-head { display: grid; grid-template-columns: 50px 1fr; gap: 12px; align-items: center; }
     .step-badge {
       width: 50px; height: 50px; display: grid; place-items: center;
@@ -164,7 +183,8 @@
     .back-bottom .back-link { border: 1px solid var(--line-w); background: transparent; color: var(--ink-soft); font-family: var(--latin); letter-spacing: 0.08em; }
 
     @media (min-width: 700px) {
-      .panel-grid { grid-template-columns: 1fr 1fr; }
+      .panel { flex-basis: 400px; }
+      .panel-grid { margin: 0; padding-left: 0; padding-right: 0; scroll-padding: 0; }
       .room-grid { grid-template-columns: 1fr 1fr; }
       .food-grid { grid-template-columns: 1fr 1fr 1fr; }
       .yesno { grid-template-columns: 1fr 1fr; }
@@ -175,7 +195,7 @@
     }
     @media (max-width: 699px) { .lit-hero { padding-right: 120px; } .hero-art { width: 118px; height: 134px; right: 4px; } }
     @media (max-width: 480px) { .meta-grid { grid-template-columns: 1fr; gap: 8px; } .lit-title { font-size: 30px; } .lit-title .lat-big { font-size: 34px; } }
-    @media print { .panel { transform: none; } }
+    @media print { .panel-grid { display: grid; grid-template-columns: 1fr 1fr; overflow: visible; } .panel { flex: none; max-width: none; opacity: 1; transform: none; } .car-nav, .swipe-hint { display: none; } }
   </style>
 </head>
 <body>
@@ -310,7 +330,9 @@
 
     <section class="lit-section">
       <div class="sec-head"><span class="no">02</span><h2>十個步驟</h2><span class="lat">Step by step</span></div>
-      <div class="panel-grid">
+      <p class="lead">左右滑動，一次看一張。</p>
+      <div class="carousel" id="stepCarousel">
+      <div class="panel-grid" id="stepTrack">
 
         <article class="panel">
           <span class="tape"></span>
@@ -416,6 +438,14 @@
         </article>
 
       </div>
+      <div class="car-nav">
+        <button type="button" class="car-btn" id="carPrev" aria-label="上一張">‹</button>
+        <div class="dots" id="carDots" role="tablist"></div>
+        <span class="car-count" id="carCount">01 / 10</span>
+        <button type="button" class="car-btn" id="carNext" aria-label="下一張">›</button>
+      </div>
+      <p class="swipe-hint lat">swipe →</p>
+      </div>
     </section>
 
     <section class="lit-section">
@@ -489,5 +519,50 @@
     <div class="foot-mark"><span class="lat">— take it slow —</span></div>
     <p class="back-bottom"><a class="back-link" href="../busan.html">← Busan</a></p>
   </main>
+  <script>
+  (function () {
+    var track = document.getElementById('stepTrack'); if (!track) return;
+    var panels = Array.prototype.slice.call(track.querySelectorAll('.panel'));
+    var dots = document.getElementById('carDots'), count = document.getElementById('carCount');
+    var prev = document.getElementById('carPrev'), next = document.getElementById('carNext');
+    var cur = 0;
+    panels.forEach(function (p, i) {
+      var d = document.createElement('button'); d.type = 'button'; d.className = 'dot'; d.setAttribute('aria-label', '第 ' + (i + 1) + ' 步');
+      d.addEventListener('click', function () { go(i); });
+      dots.appendChild(d);
+    });
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function setActive(i) {
+      cur = i;
+      panels.forEach(function (p, k) { p.classList.toggle('is-active', k === i); });
+      Array.prototype.forEach.call(dots.children, function (d, k) { d.classList.toggle('is-active', k === i); });
+      count.textContent = pad(i + 1) + ' / ' + pad(panels.length);
+      prev.disabled = i === 0; next.disabled = i === panels.length - 1;
+    }
+    function go(i) {
+      i = Math.max(0, Math.min(panels.length - 1, i));
+      var p = panels[i];
+      var left = p.offsetLeft - (track.clientWidth - p.offsetWidth) / 2;
+      track.scrollTo({ left: left, behavior: 'smooth' });
+      setActive(i);
+    }
+    prev.addEventListener('click', function () { go(cur - 1); });
+    next.addEventListener('click', function () { go(cur + 1); });
+    var t;
+    track.addEventListener('scroll', function () {
+      clearTimeout(t);
+      t = setTimeout(function () {
+        var mid = track.scrollLeft + track.clientWidth / 2, best = 0, bd = Infinity;
+        panels.forEach(function (p, k) { var c = p.offsetLeft + p.offsetWidth / 2, d = Math.abs(c - mid); if (d < bd) { bd = d; best = k; } });
+        setActive(best);
+      }, 80);
+    }, { passive: true });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') go(cur + 1);
+      if (e.key === 'ArrowLeft') go(cur - 1);
+    });
+    setActive(0);
+  })();
+  </script>
 </body>
 </html>
